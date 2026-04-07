@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0B0B0C;
+  --foreground: #EAEAEA;
+  --muted: #A1A1AA;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01" on;
+  min-height: 100vh;
+}
+
+/* subtle background texture using embedded SVG noise */
+.background-overlay::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='800' viewBox='0 0 800 800'><defs><filter id='n' x='0' y='0' width='100%' height='100%'><feTurbulence baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0' /></filter></defs><rect width='100%' height='100%' fill='%23000000' filter='url(%23n)' opacity='0.02'/></svg>");
+  background-repeat: repeat;
+  opacity: 0.08;
+  z-index: 0;
+}
+
+/* subtle image overlay (pink wave) - place your image at /public/bg-wave.jpg */
+.background-overlay::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url('/bg-wave.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.18; /* slightly increased */
+  mix-blend-mode: overlay; /* gentle contrast-enhancing blend */
+  filter: blur(6px) saturate(0.95);
+  z-index: 0;
+}
+
+/* subtle dark layer to make content readable on top of image */
+.background-overlay .bg-dim {
+  position: fixed;
+  inset: 0;
+  background: rgba(6,6,7,0.45);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.site-content { z-index: 10; position: relative; }
+
+/* add a subtle backdrop under headings to increase contrast */
+h1, h2, h3 {
+  position: relative;
+}
+
+h1::after, h2::after, h3::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: transparent;
+}
+
+/* helper class used throughout components */
+.text-muted {
+  color: var(--muted);
+}
+
+/* subtle focus outline for accessibility */
+:focus {
+  outline: 2px solid rgba(255,255,255,0.06);
+  outline-offset: 2px;
+}
