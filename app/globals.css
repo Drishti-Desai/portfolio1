@@ -60,6 +60,26 @@ body {
   z-index: 1;
 }
 
+/* graph lines background - subtle, animated */
+.bg-graph {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='400' viewBox='0 0 1200 400'><defs><linearGradient id='g' x1='0' x2='1'><stop stop-color='%23ff79c6' offset='0'/><stop stop-color='%2394f6ff' offset='1'/></linearGradient></defs><path d='M0 240 C200 200 400 280 600 220 C800 160 1000 260 1200 220' stroke='url(%23g)' stroke-width='1.8' fill='none' opacity='0.12'/><path d='M0 280 C200 240 400 320 600 260 C800 200 1000 300 1200 260' stroke='url(%23g)' stroke-width='1.4' fill='none' opacity='0.08'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  z-index: 0;
+}
+
+/* ensure the overlay and graph layers are underneath content */
+.background-overlay::before,
+.background-overlay::after,
+.bg-graph,
+.bg-dim {
+  z-index: 0;
+}
+
 .site-content { z-index: 10; position: relative; }
 
 /* add a subtle backdrop under headings to increase contrast */
